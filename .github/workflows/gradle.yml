@@ -15,5 +15,5 @@ jobs:
       - name: Build with Gradle
         run: |
           echo ${GITHUB_WORKSPACE}
-          chmod -x ${GITHUB_WORKSPACE}/3DGFX/gradlew
+          chmod +x ${GITHUB_WORKSPACE}/3DGFX/gradlew
           ${GITHUB_WORKSPACE}/3DGFX/gradlew build
