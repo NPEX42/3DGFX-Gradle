@@ -16,5 +16,4 @@ jobs:
         run: |
           echo ${GITHUB_WORKSPACE}
           chmod +x ${GITHUB_WORKSPACE}/3DGFX/gradlew
-          ${GITHUB_WORKSPACE}/3DGFX/gradlew build
-          ${GITHUB_WORKSPACE}/3DGFX/gradlew tasks --all
+          ${GITHUB_WORKSPACE}/3DGFX/gradlew build --info

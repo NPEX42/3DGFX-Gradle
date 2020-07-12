@@ -32,3 +32,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
+test {
+}
+

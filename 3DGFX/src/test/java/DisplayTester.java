@@ -20,8 +20,8 @@ public class DisplayTester {
 
 	@Test
 	public void test() {
-		assertTrue(DisplayManager.GetWidth() == 1080);
-		assertTrue(DisplayManager.GetHeight() == 720);
+		assertEquals( "Width Didn't Match, Got "+DisplayManager.GetWidth(),DisplayManager.GetWidth(), 1080);
+		assertEquals( "Height Didn't Match, Got "+DisplayManager.GetHeight(),DisplayManager.GetHeight(), 720);
 	}
 
 }
