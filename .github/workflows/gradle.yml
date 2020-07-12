@@ -13,4 +13,6 @@ jobs:
         with:
           java-version: 1.8
       - name: Build with Gradle
-        run: ./gradlew build
+        run: |
+          echo GITHUB_WORKSPACE
+          ./gradlew build
