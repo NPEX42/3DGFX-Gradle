@@ -19,10 +19,6 @@ repositories {
     mavenCentral()
 }
 
-project.ext.lwjglVersion = "3.2.3"
-project.ext.jomlVersion = "1.9.25"
-project.ext.lwjglNatives = "natives-windows"
-
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
@@ -33,6 +29,6 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
