@@ -10,7 +10,7 @@ public class DisplayTester {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		DisplayManager.Open(100, 720, "TESTING");
+		DisplayManager.Open(1080, 720, "TESTING");
 	}
 
 	@AfterClass
