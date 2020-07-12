@@ -15,4 +15,4 @@ jobs:
       - name: Build with Gradle
         run: |
           echo ${GITHUB_WORKSPACE}
-          ./gradlew build
+          ${GITHUB_WORKSPACE}/3DGFX/gradlew build
