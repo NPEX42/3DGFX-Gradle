@@ -5,6 +5,7 @@ import java.io.*;
 public class IO {
 	public static String LoadString(InputStream stream) {
 		try {
+			if(stream == null) return null;
 			BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 			StringBuilder builder = new StringBuilder();
 			String line = "";

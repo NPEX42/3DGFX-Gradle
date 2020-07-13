@@ -5,6 +5,10 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 public class Texture2D {
 	
+	public static final int
+	ALBEDO = GL_TEXTURE0,
+	NORMAL = GL_TEXTURE1;
+	
 	private int width, height, ID;
 	public static Texture2D missing, white;
 	
