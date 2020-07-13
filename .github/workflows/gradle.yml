@@ -12,9 +12,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Build with Gradle
+      - name: Clean & Build with Gradle
         run: |
           echo ${GITHUB_WORKSPACE}
           chmod +x ${GITHUB_WORKSPACE}/3DGFX/gradlew
+          ${GITHUB_WORKSPACE}/3DGFX/gradlew clean
           ${GITHUB_WORKSPACE}/3DGFX/gradlew build
 
