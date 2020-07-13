@@ -1,3 +1,3 @@
-![Java CI](https://github.com/NPEX42/CI-Tests/workflows/Java%20CI/badge.svg?event=push)
+https://github.com/NPEX42/CI-Tests/workflows/Java%20CI/badge.svg
 # CI
  
