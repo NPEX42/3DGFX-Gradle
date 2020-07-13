@@ -1,4 +1,4 @@
-package uk.co.nerdprogramming.core;
+package uk.co.nerdprogramming.std.core;
 
 import java.io.*;
 

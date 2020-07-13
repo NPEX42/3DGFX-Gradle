@@ -2,7 +2,9 @@ import java.awt.Color;
 
 import uk.co.nerdprogramming.gfx.engine.DisplayManager;
 import uk.co.nerdprogramming.gfx.engine.GLRenderer;
+import uk.co.nerdprogramming.gfx.engine.Material;
 import uk.co.nerdprogramming.gfx.engine.Mesh;
+import uk.co.nerdprogramming.gfx.engine.ShaderManager;
 import uk.co.nerdprogramming.gfx.engine.shaders.Shader;
 import uk.co.nerdprogramming.gfx.engine.textures.Texture2D;
 public class Main {
@@ -31,27 +33,23 @@ public class Main {
 		Mesh quad = Mesh.Create3D(pos,uvs, tris);
 		
 		System.err.println("[Sandbox] Loading Shaders...");
-		Shader shader = Shader.Load(
-				"uk/co/nerdprogramming/gfx/res/shaders/3d.vs",
-				"uk/co/nerdprogramming/gfx/res/shaders/3d.fs"
+		
+		ShaderManager.LoadShader("3d/basic",
+				"uk/co/nerdprogramming/gfx/res/shaders/3d.vs.glsl",
+				"uk/co/nerdprogramming/gfx/res/shaders/3d.fs.glsl"
 		);
 		
-		if(shader == null) System.exit(-1);
-		shader.SetAttrib(0, "a_Position");
-		shader.SetAttrib(1, "a_UV");
+		Material mat = new Material("3d/basic", Color.white, Texture2D.white);
 		
-		System.err.println("[Sandbox] Loading Textures...");
-		Texture2D albedo = Texture2D.missing;
-		if(albedo == null) { System.err.println("Unable To Locate Albedo"); System.exit(-1); }
-		shader.UploadTexture2D("t_Albedo", albedo, Texture2D.ALBEDO, 0);
 		long tp1, tp2, frameCount = 0, DC = 0;
 		double tpfs, accumTime = 0;
 		
 		while(DisplayManager.Update()) {
 			tp1 = System.nanoTime();
 			glr.ClearColor(Color.BLUE);
+			mat.PrepareShader();
 			for(int i = 0; i < 1; i++) {
-				glr.Render(quad, shader);
+				glr.Render(quad, mat.GetShader());
 				DC++; //Increment the number of draw calls this frame.
 			}
 			tp2 = System.nanoTime();
