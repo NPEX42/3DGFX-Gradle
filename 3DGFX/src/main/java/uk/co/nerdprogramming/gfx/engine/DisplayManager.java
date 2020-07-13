@@ -11,7 +11,7 @@ public class DisplayManager {
 		glfwMakeContextCurrent(window);
 		GL.createCapabilities();
 		
-		glfwSwapInterval(VBLANK_2ND);
+		glfwSwapInterval(VBLANK);
 	}
 	
 	public static boolean Update() {
