@@ -1,5 +1,9 @@
 package uk.co.nerdprogramming.gfx.engine;
 
+import uk.co.nerdprogramming.gfx.opengl.GLIndexBuffer;
+import uk.co.nerdprogramming.gfx.opengl.GLVertexArray;
+import uk.co.nerdprogramming.gfx.opengl.GLVertexBuffer;
+
 public class Mesh {
 	private GLVertexArray vao;
 	private GLVertexBuffer pos, uvs;

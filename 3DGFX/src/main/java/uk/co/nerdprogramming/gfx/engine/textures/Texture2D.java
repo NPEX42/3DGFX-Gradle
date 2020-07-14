@@ -20,6 +20,32 @@ public class Texture2D {
 		System.err.println("[OGL] Created Texture #"+ID+"("+width+"x"+height+")");
 	}
 	
+	
+	
+	public int getWidth() {
+		return width;
+	}
+
+
+
+	public int getHeight() {
+		return height;
+	}
+
+
+
+	public int getID() {
+		return ID;
+	}
+
+
+
+	public static Texture2D getWhite() {
+		return white;
+	}
+
+
+
 	public void SetTextureData(int[] data) {
 		glBindTexture(GL_TEXTURE_2D, ID);
 		glInvalidateTexImage(ID, 0);

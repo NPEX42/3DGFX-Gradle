@@ -1,7 +1,9 @@
-package uk.co.nerdprogramming.gfx.engine;
+package uk.co.nerdprogramming.gfx.opengl;
 
 import java.awt.Color;
 
+import uk.co.nerdprogramming.gfx.engine.Geometry;
+import uk.co.nerdprogramming.gfx.engine.Mesh;
 import uk.co.nerdprogramming.gfx.engine.apis.RendererAPI;
 import uk.co.nerdprogramming.gfx.engine.shaders.Shader;
 
