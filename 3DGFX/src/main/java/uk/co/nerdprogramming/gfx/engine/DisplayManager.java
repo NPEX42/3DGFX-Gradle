@@ -3,6 +3,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static uk.co.nerdprogramming.gfx.engine.Constants.*;
 
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 public class DisplayManager {
 	private static long window;
 	public static void Open(int width, int height, String title) {
@@ -21,8 +22,13 @@ public class DisplayManager {
 	}
 	
 	public static void Close() {
+		glfwSetWindowShouldClose(window, true);
 		glfwDestroyWindow(window);
 		glfwTerminate();
+	}
+	
+	public static void SetViewportSize(int w, int h) {
+		GL11.glViewport(0, 0, w, h);
 	}
 	
 	public static int GetWidth() {
@@ -44,5 +50,7 @@ public class DisplayManager {
 		glfwGetWindowSize(window, w, h);
 		return h[0];
 	}
+	
+	public static long GetID() {return window;}
 	
 }
