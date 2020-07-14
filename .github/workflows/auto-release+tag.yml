@@ -24,6 +24,3 @@ jobs:
           body: null
           draft: false
           prerelease: true
-    - uses: Klemensas/action-autotag@stable
-      with:
-        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
