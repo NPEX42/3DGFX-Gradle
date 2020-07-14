@@ -1,15 +1,14 @@
 import java.awt.Color;
 
+import uk.co.nerdprogramming.gfx.cameras.Camera;
+import uk.co.nerdprogramming.gfx.cameras.IdentityCamera;
+import uk.co.nerdprogramming.gfx.cameras.OrthoCamera;
 import uk.co.nerdprogramming.gfx.engine.DisplayManager;
 import uk.co.nerdprogramming.gfx.engine.Geometry;
-import uk.co.nerdprogramming.gfx.engine.Material;
-import uk.co.nerdprogramming.gfx.engine.Mesh;
 import uk.co.nerdprogramming.gfx.engine.ShaderManager;
 import uk.co.nerdprogramming.gfx.engine.UI;
 import uk.co.nerdprogramming.gfx.engine.eventSystem.EventManager;
-import uk.co.nerdprogramming.gfx.engine.input.Keyboard;
 import uk.co.nerdprogramming.gfx.engine.textures.Texture2D;
-import uk.co.nerdprogramming.gfx.io.MeshLoader;
 import uk.co.nerdprogramming.gfx.opengl.GLRenderer;
 
 public class Main {
@@ -20,7 +19,7 @@ public class Main {
 		System.err.println("[Sandbox] Opening Window...");
 		DisplayManager.Open(1080, 720, "Sandbox Application");
 		GLRenderer glr = GLRenderer.get();
-		
+		scale[0] = 128;
 		Geometry quad = Geometry.LoadGeom(
 				"res/quad.mesh",
 				"3d/basic",
@@ -30,7 +29,13 @@ public class Main {
 		
 		EventManager.AddCloseCallback(Main::OnClose);
 		EventManager.AddResizeCallback(Main::OnResize);
+		
+		Camera camera = new OrthoCamera();
+		
 		UI.Init();
+		
+		
+		
 		while(DisplayManager.Update()) {
 			UI.NewFrame();
 //			UI.ShowDemoWindow();
@@ -42,7 +47,7 @@ public class Main {
 			
 			UI.GLViewPort("ViewPort", Texture2D.missing, scale[0]);
 			glr.ClearColor(new Color(col[0], col[1], col[2], col[3]));
-			glr.Render(quad);
+			glr.Render(quad, camera);
 			UI.Render();
 		}
 		DisplayManager.Close();

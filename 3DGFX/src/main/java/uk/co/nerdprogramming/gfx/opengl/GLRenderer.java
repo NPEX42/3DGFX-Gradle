@@ -2,6 +2,8 @@ package uk.co.nerdprogramming.gfx.opengl;
 
 import java.awt.Color;
 
+import uk.co.nerdprogramming.gfx.cameras.Camera;
+import uk.co.nerdprogramming.gfx.engine.DisplayManager;
 import uk.co.nerdprogramming.gfx.engine.Geometry;
 import uk.co.nerdprogramming.gfx.engine.Mesh;
 import uk.co.nerdprogramming.gfx.engine.apis.RendererAPI;
@@ -42,6 +44,12 @@ public class GLRenderer implements RendererAPI {
 	public void Render(Geometry geom) {
 		geom.getMat().PrepareShader();
 		Render(geom.getMesh(), geom.getMat().GetShader());
+	}
+
+	@Override
+	public void Render(Geometry geom, Camera cam) {
+		geom.getMat().GetShader().UploadMat4("u_Proj", cam.GetProjection(DisplayManager.GetWidth(), DisplayManager.GetHeight()));
+		Render(geom);
 	}
 	
 }
