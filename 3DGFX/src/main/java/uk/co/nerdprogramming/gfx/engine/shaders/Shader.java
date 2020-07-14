@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import org.joml.*;
 
-import uk.co.nerdprogramming.core.IO;
+import uk.co.nerdprogramming.std.core.IO;
 import uk.co.nerdprogramming.gfx.engine.textures.Texture2D;
 public class Shader {
 	private int progID, vertID, fragID;
@@ -17,7 +17,7 @@ public class Shader {
 		this.fragID = fragID;
 	}
 	
-	public static Shader CompileShaders(String vertexSource, String fragmentSource) {
+	public static Shader CompileShadersGLSL(String vertexSource, String fragmentSource) {
 			
 			if(vertexSource == null && fragmentSource == null) return null;
 			
@@ -64,25 +64,21 @@ public class Shader {
 		return glGetProgrami(ID, GL_LINK_STATUS) == GL_TRUE;
 	}
 	
-	public static Shader Load(String vertexFilePath, String fragmentFilePath) {
+	public static Shader LoadGLSL(String vertexFilePath, String fragmentFilePath) {
 				String vs, fs;
 				
 				vs = IO.LoadString(vertexFilePath);
 				fs = IO.LoadString(fragmentFilePath);
 				if(fs != null & vs != null) {
 					System.err.println("[ShaderPipeline] Loaded Shader Successfully...");
-					return Shader.CompileShaders(vs, fs);
+					return Shader.CompileShadersGLSL(vs, fs);
 				} else {
 					System.err.println("[ShaderPipeline] Searching JAR for Shaders...");
-					vs = IO.LoadString(Shader.class.getResourceAsStream(vertexFilePath));
-					fs = IO.LoadString(Shader.class.getResourceAsStream(fragmentFilePath));
-					if(fs == null | vs == null) {
-						vs = IO.LoadString(Shader.class.getClassLoader().getResourceAsStream(vertexFilePath));
-						fs = IO.LoadString(Shader.class.getClassLoader().getResourceAsStream(fragmentFilePath));
-					}
+					vs = IO.LoadStringJAR(vertexFilePath);
+					fs = IO.LoadStringJAR(fragmentFilePath);
 					if(fs != null & vs != null) {
 						System.err.println("[ShaderPipeline] Located Shaders '"+vertexFilePath+"' & '"+fragmentFilePath+"'");
-						 return Shader.CompileShaders(vs, fs);
+						 return Shader.CompileShadersGLSL(vs, fs);
 					} else {
 						System.err.println("[ShaderPipeline] Unable To Locate Shaders '"+vertexFilePath+"' & '"+fragmentFilePath+"', Exiting...");
 						return null;
