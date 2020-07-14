@@ -1,4 +1,4 @@
-package uk.co.nerdprogramming.gfx.engine;
+package uk.co.nerdprogramming.gfx.opengl;
 import static org.lwjgl.opengl.GL15.glDeleteBuffers;
 import static org.lwjgl.opengl.GL46.*;
 public class GLVertexBuffer {

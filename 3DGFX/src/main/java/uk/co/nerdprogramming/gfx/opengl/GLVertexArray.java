@@ -1,4 +1,4 @@
-package uk.co.nerdprogramming.gfx.engine;
+package uk.co.nerdprogramming.gfx.opengl;
 
 import static org.lwjgl.opengl.GL46.*;
 

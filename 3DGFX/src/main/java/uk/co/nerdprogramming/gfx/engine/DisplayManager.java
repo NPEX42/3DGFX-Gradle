@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 public class DisplayManager {
 	private static long window;
+	private static String title;
 	public static void Open(int width, int height, String title) {
 		glfwInit();
 		window = glfwCreateWindow(width, height, title, NULL, NULL);
@@ -13,6 +14,8 @@ public class DisplayManager {
 		GL.createCapabilities();
 		
 		glfwSwapInterval(VBLANK);
+		
+		DisplayManager.title = title;
 	}
 	
 	public static boolean Update() {
@@ -49,6 +52,10 @@ public class DisplayManager {
 		
 		glfwGetWindowSize(window, w, h);
 		return h[0];
+	}
+	
+	public static String GetTitle() {
+		return title;
 	}
 	
 	public static long GetID() {return window;}
