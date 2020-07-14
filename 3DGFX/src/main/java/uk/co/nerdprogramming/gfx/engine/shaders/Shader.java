@@ -74,12 +74,8 @@ public class Shader {
 					return Shader.CompileShadersGLSL(vs, fs);
 				} else {
 					System.err.println("[ShaderPipeline] Searching JAR for Shaders...");
-					vs = IO.LoadString(Shader.class.getResourceAsStream(vertexFilePath));
-					fs = IO.LoadString(Shader.class.getResourceAsStream(fragmentFilePath));
-					if(fs == null | vs == null) {
-						vs = IO.LoadString(Shader.class.getClassLoader().getResourceAsStream(vertexFilePath));
-						fs = IO.LoadString(Shader.class.getClassLoader().getResourceAsStream(fragmentFilePath));
-					}
+					vs = IO.LoadStringJAR(vertexFilePath);
+					fs = IO.LoadStringJAR(fragmentFilePath);
 					if(fs != null & vs != null) {
 						System.err.println("[ShaderPipeline] Located Shaders '"+vertexFilePath+"' & '"+fragmentFilePath+"'");
 						 return Shader.CompileShadersGLSL(vs, fs);

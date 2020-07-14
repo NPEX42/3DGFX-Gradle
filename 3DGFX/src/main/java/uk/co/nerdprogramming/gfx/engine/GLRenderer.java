@@ -35,5 +35,11 @@ public class GLRenderer implements RendererAPI {
 		shader.Bind();
 		glDrawElements(GL_TRIANGLES, mesh.GetVertexCount(), GL_UNSIGNED_INT, 0);
 	}
+
+	@Override
+	public void Render(Geometry geom) {
+		geom.getMat().PrepareShader();
+		Render(geom.getMesh(), geom.getMat().GetShader());
+	}
 	
 }

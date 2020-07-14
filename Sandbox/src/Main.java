@@ -2,11 +2,13 @@ import java.awt.Color;
 
 import uk.co.nerdprogramming.gfx.engine.DisplayManager;
 import uk.co.nerdprogramming.gfx.engine.GLRenderer;
+import uk.co.nerdprogramming.gfx.engine.Geometry;
 import uk.co.nerdprogramming.gfx.engine.Material;
 import uk.co.nerdprogramming.gfx.engine.Mesh;
 import uk.co.nerdprogramming.gfx.engine.ShaderManager;
-import uk.co.nerdprogramming.gfx.engine.shaders.Shader;
 import uk.co.nerdprogramming.gfx.engine.textures.Texture2D;
+import uk.co.nerdprogramming.gfx.io.MeshLoader;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -14,25 +16,24 @@ public class Main {
 		DisplayManager.Open(1080, 720, "Sandbox Application");
 		GLRenderer glr = GLRenderer.get();
 		
-		float[] pos = {
-				-1, -1, 0,
-				+1, -1, 0,
-				+1, +1, 0,
-				-1, +1, 0,
-		};
-		
-		float[] uvs = {
-				0,0,
-				1,0,
-				1,1,
-				0,1,
-		};
-		
-		int[] tris = {0,1,2,2,3,0};
+//		float[] pos = {
+//				-1, -1, 0,
+//				+1, -1, 0,
+//				+1, +1, 0,
+//				-1, +1, 0,
+//		};
+//		
+//		float[] uvs = {
+//				0,0,
+//				1,0,
+//				1,1,
+//				0,1,
+//		};
+//		
+//		int[] tris = {0,1,2,2,3,0};
 		System.err.println("[Sandbox] Building Mesh...");
-		Mesh quad = Mesh.Create3D(pos,uvs, tris);
-		
-		System.err.println("[Sandbox] Loading Shaders...");
+		//MeshLoader.ConvertOBJ("res/cube.obj");
+		Mesh quad = MeshLoader.LoadMesh("res/torus.mesh");
 		
 		ShaderManager.LoadShader("3d/basic",
 				"uk/co/nerdprogramming/gfx/res/shaders/3d.vs.glsl",
@@ -41,7 +42,9 @@ public class Main {
 		
 		Material mat = new Material("3d/basic", Color.white, Texture2D.white);
 		
-		long tp1, tp2, frameCount = 0, DC = 0;
+		Geometry geom = new Geometry(mat, quad);
+		
+		long tp1, tp2, frameCount = 0, DC = 0, VC = 0;
 		double tpfs, accumTime = 0;
 		
 		while(DisplayManager.Update()) {
@@ -49,15 +52,17 @@ public class Main {
 			glr.ClearColor(Color.BLUE);
 			mat.PrepareShader();
 			for(int i = 0; i < 1; i++) {
-				glr.Render(quad, mat.GetShader());
+				glr.Render(Geometry.GetErrorGeom());
 				DC++; //Increment the number of draw calls this frame.
+				VC += quad.GetVertexCount(); 
 			}
 			tp2 = System.nanoTime();
 			tpfs = (tp2 - tp1) / 1000000000f;
-			System.err.printf("TPF: %03.9fS (%03.4fms) | FPS: %.2f | DC: %d\r",tpfs, tpfs * 1000f, 1f / tpfs, DC);
+			System.err.printf("TPF: %03.9fS (%03.4fms) | FPS: %.2f | DC: %d | Vertex Count: %d                          \r",tpfs, tpfs * 1000f, 1f / tpfs, DC, VC);
 			accumTime += tpfs;
 			frameCount++;
 			DC = 0;
+			VC = 0;
 		}
 		
 		double avg = accumTime / frameCount;

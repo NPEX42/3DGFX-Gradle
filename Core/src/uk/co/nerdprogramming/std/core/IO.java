@@ -26,4 +26,14 @@ public class IO {
 			return null;
 		}
 	}
+	
+	public static String LoadStringJAR(String filePath) {
+		String source = IO.LoadString(IO.class.getClassLoader().getResourceAsStream(filePath));
+		if(source == null) {
+			source = IO.LoadString(IO.class.getClassLoader().getResourceAsStream(filePath));
+		}
+		return source;
+	}
+	
+
 }
